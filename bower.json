@@ -1,0 +1,18 @@
+{
+  "name": "mongo-webscraper",
+  "description": "homework assignment for Chance Eakin at the Coding Bootcamp at UT Austin",
+  "main": "index.js",
+  "authors": [
+    "Chance Eakin"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/chanceeakin/mongo-webscraper",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
