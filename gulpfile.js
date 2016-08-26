@@ -1,4 +1,6 @@
-var gulp = require('gulp'),
+'use strict';
+
+const gulp = require('gulp'),
 	sass = require('gulp-sass');
 
 gulp.task('hello', function() {
