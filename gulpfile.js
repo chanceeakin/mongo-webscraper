@@ -16,7 +16,7 @@ gulp.task('sass', function () {
 
 gulp.task('start', function () {
 	nodemon({
-		script: 'index.js',
+		script: 'server.js',
 		ext: 'js html',
 		env: { 'NODE_ENV': 'development' }
 	});
