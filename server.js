@@ -28,6 +28,8 @@ db.once('open', function () {
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-app.listen(3000, function (req, res) {
+var PORT = process.env.PORT || 3000;
+
+app.listen(PORT, function (req, res) {
 	console.log('app is running.');
 });
