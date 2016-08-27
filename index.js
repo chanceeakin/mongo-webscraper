@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({
 	extended: false
 }));
 
-mongoose.connect('mongodb://localhost/webscraper');
+mongoose.connect('mongodb://root:test@ds017726.mlab.com:17726/heroku_rpw8rrd4');
 var db = mongoose.connection;
 
 db.on('error', function (err) {
