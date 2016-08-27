@@ -8,20 +8,18 @@ module.exports = function (app) {
 
 	app.get('/scrape', function (req, res) {
 		// first, we grab the body of the html with request
-		request('http://www.theonion.com/', function (error, response, html) {
+		request('http://www.theonion.com/', function (err, response, html) {
 			// then, we load that into cheerio and save it to $ for a shorthand selector
 			var $ = cheerio.load(html);
 			// now, we grab every h2 within an article tag, and do the following:
 			$('.inner').each(function (i, element) {
-
 				// save an empty result object
 				var result = {};
 
-				// add the text and href of every link, 
+				// add the text and href of every link,
 				// and save them as properties of the result obj
 				result.title = $(this).children('header .headline a').text();
 				result.link = $(this).children('header .headline a').attr('href');
-				result.desc = $(this).children('.desc').text();
 
 				// using our Article model, create a new entry.
 				// Notice the (result):
@@ -33,18 +31,14 @@ module.exports = function (app) {
 					// log any errors
 					if (err) {
 						console.log(err);
-					}
-					// or log the doc
-					else {
+					} else {
 						console.log(doc);
 					}
 				});
-
-
 			});
 		});
 		// tell the browser that we finished scraping the text.
-		res.send("Scrape Complete");
+		res.send('Scrape Complete');
 	});
 
 	app.get('/', function (req, res) {
