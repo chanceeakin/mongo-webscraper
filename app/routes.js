@@ -55,36 +55,38 @@ module.exports = function (app) {
 		});
 	});
 
-	app.get('articles/:id', function (req, res) {
-		var myId = req.params.id;
-		Article.findOne({ '_id': myId })
-			.populate('note')
-			.exec(function (err, docs) {
+	app.route('/articles/:id')
+		.get(function (req, res) {
+			var myId = req.params.id;
+			Article.findOne({ '_id': myId })
+				.populate('note')
+				.exec(function (err, docs) {
+					if (err) {
+						console.log(err);
+					} else {
+						res.json(docs);
+					}
+				});
+		})
+		.post(function (req, res) {
+			console.log('REQ DOT BODY: ' + JSON.stringify(req.data));
+			var newNote = new Note(req.body);
+			newNote.save(function (err, docs) {
 				if (err) {
 					console.log(err);
 				} else {
-					res.json(docs);
+					console.log(docs);
+					Article.findOneAndUpdate({ '_id': req.params.id }, { 'note': docs._id })
+						.exec(function (err, docs) {
+							if (err) {
+								console.log(err);
+							} else {
+								res.send(docs);
+							}
+						});
 				}
 			});
-	});
-
-	app.post('/articles/:id', function (req, res) {
-		var newNote = new Note(req.body);
-		newNote.save(function (err, docs) {
-			if (err) {
-				console.log(err);
-			} else {
-				Article.findOneAndUpdate({ '_id': req.params.id }, { 'note': docs._id })
-					.exec(function (err, docs) {
-						if (err) {
-							console.log(err);
-						} else {
-							res.send(docs);
-						}
-					});
-			}
 		});
-	});
 
 	app.get('/', function (req, res) {
 		console.log('serving index.hbs');

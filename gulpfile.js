@@ -9,7 +9,7 @@ gulp.task('hello', function () {
 });
 
 gulp.task('sass', function () {
-	return gulp.src('bower_components/materialize/sass/materialize.scss')
+	return gulp.src('scss/style.scss')
 		.pipe(sass()) // Converts Sass to CSS with gulp-sass
 		.pipe(gulp.dest('public/css'));
 });
